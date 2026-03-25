@@ -1,0 +1,6 @@
+<p>component-six works!</p>
+
+<div *ngIf="data3_1$ | async as data3"> <!-- The *ngIf directive checks if data3 has a truthy value before rendering the content inside the div. If data3 is null or undefined, the content inside the div will not be rendered. -->
+  <p><strong>ID:</strong> {{ data3.id }}</p>
+  <p><strong>Title:</strong> {{ data3.title }}</p>
+</div>

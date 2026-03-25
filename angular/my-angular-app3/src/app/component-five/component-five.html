@@ -1,0 +1,6 @@
+<p>component-five works!</p>
+
+<div *ngFor="let i of data3$ | async"> <!-- async pipe is used to subscribe to an Observable and get its latest value automatically. In this case, it subscribes to the data3$ Observable and assigns its latest value to the variable i for each iteration of the ngFor loop. -->
+  <a [routerLink]="['/todos', i.id]">Todo ID: {{ i.id }} Todo title: {{ i.title }}</a> 
+</div>
+

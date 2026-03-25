@@ -1,0 +1,39 @@
+<p>component-one works!</p>
+
+<p>FORM:</p>
+
+<form (ngSubmit)="onSubmit1()" #form="ngForm"> <!-- (ngSubmit) - это событие, которое срабатывает при отправке формы. Когда пользователь нажимает кнопку отправки, Angular вызывает метод onSubmit() в компоненте. #form="ngForm" - это шаблонная переменная, которая позволяет нам получить доступ к состоянию формы и ее элементам внутри шаблона. -->
+    <label for="three_one">Name</label><br>
+    <input type="text" name="three_one_" [(ngModel)]="input1" required><br> <!-- [(ngModel)] - это синтаксис для двусторонней привязки данных в Angular. Он связывает значение поля ввода с переменной input1 в компоненте. Когда пользователь вводит текст в поле, значение input1 автоматически обновляется, и наоборот, если значение input1 изменится в компоненте, оно также обновится в поле ввода. -->
+
+    <label for="three_two">Password</label><br>
+    <input type="password" name="three_two_" [(ngModel)]="input2" required><br> <!-- name - атрибут, который связывает label с полем ввода -->
+
+    <input type="submit" value="Click to submit">
+</form> <br><br><br>
+
+
+
+<p>Get user:</p>
+<form (ngSubmit)="onSubmit2()" #form="ngForm">
+    <label for="four_one">User name:</label><br>
+    <input type="text" name="four_one_" [(ngModel)]="input3" required><br><br>
+
+    <input type="submit" value="Click to submit">
+</form> <br><br>
+
+
+<div *ngIf="data1_1$ | async as data1_1">
+    <p><strong>ID:</strong> {{ data1_1.id }} </p>
+    <p><strong>Name:</strong> {{ data1_1.name }}</p>
+    <p><strong>Password:</strong> {{ data1_1.password }}</p>
+</div>
+
+
+<p>Get all users:</p>
+
+<button (click)="getAllUsers()">Click</button>
+
+<div *ngFor="let i of data1_2$ | async">
+    <p> <strong>ID:</strong> {{ i.id + " " }} <strong>Name:</strong> {{ i.name + " " }} <strong>Password:</strong> {{ i.password }}</p>
+</div>
