@@ -24,25 +24,25 @@ def create_user2(request):
 
 
 def get_users(request):
-    users =  ModelOne.objects.all() # Возвращает все объекты из модели
-    data = list(users.values()) # Возвращает все объекты из модели в виде списка словарей
-    return JsonResponse(data, safe=False)
+    users =  ModelOne.objects.all() # Возвращает все объекты из модели в виде QuerySet
+    data = list(users.values())
+    return JsonResponse(data, safe=False) # safe=False - указывать чтобы django не проверяла эти данные на безопасность
     # return render(request, "blog/users.html", {"users": users})
 
 
 def get_user(request, name):
-    # user =  ModelOne.objects.get(name=name) # Возвращает один объект
-    # user =  ModelOne.objects.filter(id__gt=id)
-    user = get_object_or_404(ModelOne.objects.values(), name=name) # Лучше использовать этот вариант в случае если объекта нет
-    # user = get_object_or_404(ModelOne, name=name) # Альтернатива
-    # data = {
+    # user =  ModelOne.objects.get(name=name) # Возвращает один объект модели. Можно преобразовать в словарь вручную
+    user =  ModelOne.objects.filter(name=name).values().first() # метод filter() возвращает QuerySet, а values() превращает словарь(работает только с QuerySet), затем first() возвращает первый словарь
+    # user = get_object_or_404(ModelOne, name=name) # Лучше использовать этот вариант в случае если объект может отсутствовать
+    # data = { # Преобразует объект в словарь вручную
     #     "id": user.id,
     #     "name": user.name,
     #     "password": user.password,
     # }
     # return JsonResponse(data)
-    return JsonResponse(user) 
-
+    if not user:
+        return JsonResponse({"error": "User not found"}, status=404)
+    return JsonResponse(user)
     # return HttpResponse(f"User {user.name}")
     # return render(request, "blog/user.html", {"user": user}) # Последний аргумент это контекстный словарь для передачи данных в шаблон
 
@@ -55,19 +55,11 @@ def change_user(request, id, name):
 
 def get_user_json(request, id):
     user = get_object_or_404(ModelOne, id=id)
-    return JsonResponse({
+    data = {
         "name": user.name,
         "password": user.password
-    })
-
-
-def my_view(request):
-    if request.method == "GET":
-        return HttpResponse("GET request")
-    
-    if request.method == "POST":
-        return HttpResponse("POST request")
-    
+    }
+    return JsonResponse(data)
 
 
 # View - a function that returns a response
