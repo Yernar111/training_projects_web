@@ -29,6 +29,10 @@ def get_users(request):
     return JsonResponse(data, safe=False) # safe=False - указывать чтобы django не проверяла эти данные на безопасность
     # return render(request, "blog/users.html", {"users": users})
 
+    # Алтернатива
+    # users =  ModelOne.objects.all().values()
+    # return JsonResponse(list(users), safe=False)
+
 
 def get_user(request, name):
     # user =  ModelOne.objects.get(name=name) # Возвращает один объект модели. Можно преобразовать в словарь вручную
@@ -47,19 +51,19 @@ def get_user(request, name):
     # return render(request, "blog/user.html", {"user": user}) # Последний аргумент это контекстный словарь для передачи данных в шаблон
 
 
-def change_user(request, id, name):
-    user = get_object_or_404(ModelOne, id=id)
-    user.name = name
-    user.save()
-    return HttpResponse(f"User {user.name} changed")
+# def change_user(request, id, name):
+#     user = get_object_or_404(ModelOne, id=id)
+#     user.name = name
+#     user.save()
+#     return HttpResponse(f"User {user.name} changed")
 
-def get_user_json(request, id):
-    user = get_object_or_404(ModelOne, id=id)
-    data = {
-        "name": user.name,
-        "password": user.password
-    }
-    return JsonResponse(data)
+# def get_user_by_id(request, id):
+#     user = get_object_or_404(ModelOne, id=id)
+#     data = {
+#         "name": user.name,
+#         "password": user.password
+#     }
+#     return JsonResponse(data)
 
 
 # View - a function that returns a response
@@ -83,3 +87,4 @@ def get_user_json(request, id):
 # JsonResponse       # JSON
 # render()            # HTML-файл
 # redirect()          # Перенаправление
+

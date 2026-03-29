@@ -19,7 +19,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('blog1.urls')), # Для передачи обработки URL в другое приложение
+    path('', include('blog1.urls')), # Для передачи обработки URL в другое приложение при переходе по данному маршруту
+    path('blog2/', include('blog2.urls')),
 ]
 
 
