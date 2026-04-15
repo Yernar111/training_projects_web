@@ -1,4 +1,5 @@
 # Подключение к БД
+# Dependecies это функции или объекты, которые позволяют получать доступ к базе данных. Функция зависимость вызывается перед выполнением эндпоинта
 from config import load_config
 import psycopg2
 from psycopg2.extras import RealDictCursor

@@ -3,8 +3,9 @@ from rest_framework.viewsets import ModelViewSet
 from .models import ModelOne
 from .serializers import ModelOneSerializer
 
-from rest_framework.decorators import APIView, action
+from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
@@ -12,10 +13,11 @@ from rest_framework.permissions import IsAuthenticated
 class OneViewSet(ModelViewSet): # Класс наследует ModelViewSet. Это позволяет не писать вручную CRUD методы.
     queryset = ModelOne.objects.all()
     serializer_class = ModelOneSerializer # Указываем класс сериализатора
+    # Кастомный метод для нестандартной логики(в данном случае бесполезный, так как повторяет retrieve)
     @action(detail=True, methods=['get'], url_path='custom') # detail=True конкретный URL-адрес, methods=['get'] разрешенные методы, url_path кастомный путь
     def custom(self, request, pk=None): # pk=None это id полученный из URL-адреса(pk-primary key)
         a = self.get_object() # Получение объекта текущей модели на основе pk(иначе вернет 404)
-        b = ModelOne.objects.filter(id=a)
+        b = ModelOne.objects.filter(id=a.id)
         serializer = ModelOneSerializer(b, many=True) # Сериализация в JSON(в данном случае объекты ModelOne, many=True означает сериализацию сразу нескольких объектов и поэтому возвращает массив словарей)
         return Response(serializer.data)
         # return Response({"a": 1})

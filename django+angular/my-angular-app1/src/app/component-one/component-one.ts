@@ -34,13 +34,13 @@ export class ComponentOne {
 
   onSubmit2(){
     this.data1_1$ = this.serviceOne.get_user1(this.input3);
-    this.data1_1$.subscribe(data => console.log(data));
+    this.data1_1$.subscribe(data =>console.log(data));
   //   this.serviceOne.get_user1(this.input3).subscribe(data => {
   //     // this.data1 = data;
 
   //     console.log(data);
 
-  //   });
+  //   }); 
   }
 
   data1_2$!: Observable<ServiceOneInterface[]>;

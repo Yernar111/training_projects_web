@@ -1,5 +1,6 @@
 # При использовании DRF упрощается содержимое файла urls.py
-from rest_framework.routers import DefaultRouter, path
+from rest_framework.routers import DefaultRouter
+from django.urls import path
 from .views import OneApiView, OneViewSet
 
 from rest_framework.authtoken.views import obtain_auth_token # Вью для получения токена
