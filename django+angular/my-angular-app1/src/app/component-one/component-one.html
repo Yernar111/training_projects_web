@@ -37,3 +37,25 @@
 <div *ngFor="let i of data1_2$ | async">
     <p> <strong>ID:</strong> {{ i.id + " " }} <strong>Name:</strong> {{ i.name + " " }} <strong>Password:</strong> {{ i.password }}</p>
 </div>
+
+<br><br><br>
+<p>Login</p>
+<form (ngSubmit)="login()" #form="ngForm">
+    <label for="four_one">Name</label><br>
+    <input type="text" name="four_one_" [(ngModel)]="username" required><br>
+
+    <label for="four_two">Password</label><br>
+    <input type="password" name="four_two_" [(ngModel)]="password" required><br>
+
+    <input type="submit" value="Login">
+</form> <br><br>
+
+<p>Get all users (protected):</p>
+
+<button (click)="getAllUsersProtected()">Click</button>
+
+<div *ngFor="let i of data1_3$ | async">
+    <p> <strong>ID:</strong> {{ i.id + " " }} <strong>Name:</strong> {{ i.name + " " }} <strong>Password:</strong> {{ i.password }}</p>
+</div>
+
+<br><br>
